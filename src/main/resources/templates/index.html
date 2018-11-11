@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Spring Boot - AJAX Example</title>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/request.js"></script>
+</head>
+<body>
+
+    <h1>To Do List Example</h1>
+
+    <h3>To Do List Add</h3>
+    <div>
+        <form id="todolistForm">
+
+            <!--<label>Date:</label>-->
+            <!--<input type="text" id="date" placeholder="Enter Date">-->
+
+            <label>Name:</label>
+            <input type="text" id="name" placeholder="Enter Name"/>
+
+            <label>Content:</label>
+            <input type="text" id="content" placeholder="Enter Content"/>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <h3>To Do List Add No Form</h3>
+    <div>
+        <div id="todolist">
+
+            <label>Name:</label>
+            <input type="text" id="name1" placeholder="Enter Name"/>
+
+            <label>Content:</label>
+            <input type="text" id="content1" placeholder="Enter Content"/>
+
+            <button id="noFormButton">Submit</button>
+        </div>
+    </div>
+
+    <h3>To Do List Add General Form</h3>
+    <div>
+        <form action="/test" method="post" >
+
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="Enter Name"/>
+
+            <label>Content:</label>
+            <input type="text" name="content" placeholder="Enter Content"/>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <h3>To Do List Add RequestParam</h3>
+    <div>
+        <form id="todolistParamForm">
+
+            <label>Name:</label>
+            <input type="text" id="paramName" placeholder="Enter Name"/>
+
+            <label>Content:</label>
+            <input type="text" id="paramContent" placeholder="Enter Content"/>
+
+            <button type="submit" value="Submit">Submit</button>
+        </form>
+    </div>
+
+    <h3>To Do List Add Enter</h3>
+    <div>
+        <div id="todolistEnterForm">
+
+            <label>Name:</label>
+            <input type="text" id="enterName" placeholder="Enter Name"/>
+
+        </div>
+    </div>
+
+
+    <br>
+    <h3>To Do List Update</h3>
+    <div>
+        <form id="todolistUpdateForm">
+            <label>ID:</label>
+            <input type="text" id="updateId" placeholder="Enter ID"/>
+
+            <label>Name:</label>
+            <input type="text" id="updateName" placeholder="Enter New Name"/>
+
+            <label>Context:</label>
+            <input type="text" id="updateContext" placeholder="Enter New Context"/>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <br>
+    <h3>To Do List</h3>
+    <div>
+        <table id="toDoListTable" width="600" border="1">
+            <thead>
+            <tr>
+                <th width="50">ID</th>
+                <th width="300">Date</th>
+                <th width="100">Name</th>
+                <th width="400">CONTENT</th>
+                <th id="todolistDeleteForm"width="50">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
