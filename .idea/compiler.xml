@@ -11,6 +11,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ToDoList0924" target="1.8" />
+      <module name="ToDoList0924_main" target="1.8" />
+      <module name="ToDoList0924_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
