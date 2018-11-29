@@ -1,36 +1,19 @@
+var $ = require('jquery');
+var { DateTime } = require('luxon');
+
 $(document).ready(function () {
 
-    $('#todolistEnterForm').bind('keypress', function (event) {
-        event.preventDefault();
-
-        var formData = {
-            name: $('#enterName').val()
-        }
-        if (event.which == 13 || event.keyCode == 13) {
-
-            $.ajax({
-                type: 'POST',
-                contentType: 'application/json',
-                url: window.location + 'api/todolist/',
-                data: JSON.stringify(formData),
-                dataType: 'json',
-                success: function (result) {
-                    console.log(result);
-                },
-                error: function (e) {
-                    alert('Error!')
-                    console.log('ERROR: ', e);
-                }
-            });
-            resetData();
-            window.location.reload();
-        }
-    });
-
     $('#todolistForm').submit(function (event) {
-        event.preventDefault();
+        event.preventDefault();        
+
+        function datetimeToLong(estimated) {
+            return DateTime.fromISO(estimated).toMillis();
+        }
+
+        var dataEstime = $('#estimated').val();
 
         var formData = {
+            estimated: datetimeToLong(dataEstime),
             date: new Date().getTime(),
             name: $('#name').val(),
             content: $('#content').val()
@@ -57,82 +40,6 @@ $(document).ready(function () {
 
 
 
-    $('#noFormButton').click(function (event) {
-        event.preventDefault();
-        var formData = {
-            name: $('#name1').val(),
-            content: $('#content1').val()
-        }
-
-        $.ajax({
-            type: 'POST',
-            contentType: 'application/json',
-            url: window.location + 'api/todolist/',
-            data: JSON.stringify(formData),
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-            },
-            error: function (e) {
-                alert('Error!')
-                console.log('ERROR: ', e);
-            }
-        });
-        resetData();
-        window.location.reload();
-    });
-
-    $('#todolistParamForm').submit(function (event) {
-        event.preventDefault();
-        var formData = {
-            name: $('#paramName').val(),
-            content: $('#paramContent').val()
-        }
-
-        $.ajax({
-            type: 'GET',
-            url: window.location + 'api/todolist/requestParam',
-            data: 'name=' + formData.name + '&content=' + formData.content,
-            success: function (result) {
-                console.log(result);
-            },
-            error: function (e) {
-                alert('Error!')
-                console.log('ERROR: ', e);
-            }
-        });
-        resetData();
-        window.location.reload();
-    });
-
-    $('#todolistUpdateForm').submit(function (event) {
-        event.preventDefault();
-        var formData = {
-            id: $('#updateId').val(),
-            name: $('#updateName').val(),
-            content: $('#updateContext').val()
-        }
-
-        var id = $('#updateId').val();
-        console.log('formData before PUT: ' + formData);
-
-        $.ajax({
-            type: 'PUT',
-            contentType: 'application/json',
-            url: window.location + 'api/todolist/' + id,
-            data: JSON.stringify(formData),
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-            },
-            error: function (e) {
-                alert('Error! 找不到此ID')
-                console.log('ERROR: ', e);
-            }
-        });
-        window.location.reload();
-    });
-
     $('#toDoListTable').on('click', 'a', function () {
         var todolistId = $(this).parent().find('#deleteId').val();
 
@@ -156,14 +63,15 @@ $(document).ready(function () {
         success: function (result) {
             $.each(result, function (index, todolist) {
                 var toDoListRow = '<tr>' + index +
+                    '<td align="center"><img src="../img/3line.png" height="30" width="30"></td>' +
                     '<td>' + todolist.id + '</td>' +
-                    '<td>' + new Date(todolist.date).toLocaleString() + '</td>' +
+                    '<td>' + new Date(todolist.estimated).toLocaleString() + '</td>' +
+                    '<td>' + new Date(todolist.createDate).toLocaleString() + '</td>' +
                     '<td>' + todolist.name + '</td>' +
-                    '<td>' + todolist.content + '</td>' +
-                    '<td>' +
-                    '<input type="hidden" id="deleteId" value=' + todolist.id + '>' +
-                    '<a>' + '<button type="submit" >Delete</button>' + '</a>' +
-                    '</td>' + '</tr>';
+                    '<td>' + '<input type="hidden" id="deleteId" value=' + todolist.id + '>' +
+                    '<a>' + '<button type="submit" >Delete</button>' + '</a>' + '</td>' +
+                    '</tr>' +
+                    '<tr><td></td><td colspan="5">' + todolist.content + '</td></tr>';
                 $('#toDoListTable tbody').append(toDoListRow);
             });
         },

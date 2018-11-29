@@ -20,7 +20,10 @@ public class ToDoList {
     private String content;
 
     @Column(name = "date")
-    private Timestamp date;
+    private Timestamp createDate;
+
+    @Column(name = "estimated")
+    private Timestamp estimated;
 
     public Long getId() {
         return id;
@@ -46,12 +49,20 @@ public class ToDoList {
         this.content = content;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
+
+    public Timestamp getEstimated() {
+        return estimated;
+    }
+
+    public void setEstimated(Timestamp estimated) {
+        this.estimated = estimated;
     }
 
 
@@ -59,7 +70,8 @@ public class ToDoList {
         private Long id;
         private String name;
         private String content;
-        private Timestamp date;
+        private Timestamp createDate;
+        private Timestamp estimated;
 
         private Builder() {}
 
@@ -80,8 +92,13 @@ public class ToDoList {
             return this;
         }
 
-        public Builder date(Timestamp date) {
-            this.date = date;
+        public Builder createDate(Timestamp createDate) {
+            this.createDate = createDate;
+            return this;
+        }
+
+        public Builder estimated(Timestamp estimated) {
+            this.estimated = estimated;
             return this;
         }
 
@@ -90,7 +107,8 @@ public class ToDoList {
             toDoList.setId(id);
             toDoList.setName(name);
             toDoList.setContent(content);
-            toDoList.setDate(date);
+            toDoList.setCreateDate(createDate);
+            toDoList.setEstimated(estimated);
             return toDoList;
         }
     }

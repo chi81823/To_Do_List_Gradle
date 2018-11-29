@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/todolist")
 public class ToDoListController {
-    private static final String PATH_VAR_TO_DO_LIST = "/requestParam";
 
     @Autowired
     private ToDoListService service;
@@ -47,10 +46,14 @@ public class ToDoListController {
         service.delete(id);
     }
 
-    @GetMapping(PATH_VAR_TO_DO_LIST)
-    public ToDoList addGet(@RequestParam String name, @RequestParam String content) {
+    @GetMapping("createTime")
+    public List<ToDoList> getCreateTime(@RequestParam Long time) {
+        return service.findCreateDate(time);
+    }
 
-        return service.save(ToDoList.Builder.create().name(name).content(content).build());
+    @GetMapping("estimated")
+    public List<ToDoList> getEstimated(@RequestParam Long start, Long end) {
+        return service.findEstimated(start, end);
     }
 
 
