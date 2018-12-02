@@ -17828,6 +17828,39 @@ $(document).ready(function () {
         }
     });
 
+    $('#todolistSelectCreate').submit(function (event) {
+        event.preventDefault();        
+
+        function datetimeToLong(estimated) {
+            return DateTime.fromISO(estimated).toMillis();
+        }
+
+        var selectTime = datetimeToLong($('#selectCreate').val());
+
+        $.ajax({
+            type: 'GET',            
+            url: window.location + 'api/todolist/createTime',
+            data : 'time=' + selectTime,
+            success: function (result) {
+                $.each(result, function (index, todolist) {
+                    var toDoListRow = '<tr>' + index +                        
+                        '<td>' + todolist.id + '</td>' +
+                        '<td>' + new Date(todolist.estimated).toLocaleString() + '</td>' +
+                        '<td>' + new Date(todolist.createDate).toLocaleString() + '</td>' +
+                        '<td>' + todolist.name + '</td>' +                        
+                        '</tr>' +
+                        '<tr><td></td><td colspan="5">' + todolist.content + '</td></tr>';
+                    $('#toDoListSelectCreateTable tbody').append(toDoListRow);
+                });
+            },
+            error: function (e) {
+                alert('ERROR: ', e);
+                console.log('ERROR: ', e);
+            }
+        });
+    });
+
+
     function resetData() {
         $('#name').val();
         $('#content').val();
