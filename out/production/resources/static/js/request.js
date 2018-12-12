@@ -25,16 +25,16 @@ $(document).ready(function () {
             url: '/api/todolist/',
             data: JSON.stringify(formData),
             dataType: 'json',
-            success: function (result) {
-                console.log(result);
+            success: function () {
+                alert('新增成功!')
+                history.back()
+                // console.log();
             },
             error: function (e) {
                 alert('Error!')
                 console.log('ERROR: ', e);
             }
-        });
-        resetData();
-        window.location.reload();
+        });        
 
     });
 
