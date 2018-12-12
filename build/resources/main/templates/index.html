@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Spring Boot - AJAX Example</title>
+    <meta charset="utf-8"/>
+    <script src="/js/bundle.js"></script>
+</head>
+<body>
+
+<h1>To Do List Example</h1>
+
+<h3>To Do List Add</h3>
+<div>
+    <form id="todolistForm">
+
+
+        <label>預計時間</label>
+        <input type="datetime-local" id="estimated" value="2018-11-01T00:00"/>
+
+        <label>事項主旨:</label>
+        <input type="text" id="name" placeholder="Enter Name"/>
+
+        <label>事項內容:</label>
+        <input type="text" id="content" placeholder="Enter Content"/>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+<br>
+<h3>To Do List Update</h3>
+<div>
+    <form id="todolistUpdateForm">
+        <label>ID:</label>
+        <input type="text" id="updateId" placeholder="Enter ID"/>
+
+        <label>Name:</label>
+        <input type="text" id="updateName" placeholder="Enter New Name"/>
+
+        <label>Context:</label>
+        <input type="text" id="updateContext" placeholder="Enter New Context"/>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<br>
+<h3>To Do List</h3>
+<div>
+    <table id="toDoListTable" width="1000">
+        <thead>
+        <tr>
+            <th width="50">清單</th>
+            <th width="50">ID</th>
+            <th width="200">預計執行時間</th>
+            <th width="200">建立時間</th>
+            <th width="500">Subject</th>
+            <th id="todolistDeleteForm" width="50">Delete</th>
+            <th id="todolistEditForm" width="50">Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
