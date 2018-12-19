@@ -6,6 +6,7 @@ import todolist.domain.entity.ToDoList;
 import todolist.exception.NotFound;
 import todolist.service.ToDoListService;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RestController
@@ -16,14 +17,14 @@ public class ToDoListController {
     private ToDoListService service;
 
     @GetMapping("/{id}")
-    public ToDoList getById(@PathVariable long id) throws NotFound {
+    public ToDoList getById(@PathVariable long id) throws FileNotFoundException {
 
         return service.findById(id);
     }
 
 
     @PutMapping("/{id}")
-    public ToDoList update(@PathVariable Long id, @RequestBody ToDoList toDoList) throws NotFound {
+    public ToDoList update(@PathVariable Long id, @RequestBody ToDoList toDoList) throws FileNotFoundException {
 
         return service.update(id, toDoList.getName(), toDoList.getContent());
     }

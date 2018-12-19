@@ -6,6 +6,7 @@ import todolist.domain.entity.ToDoList;
 import todolist.exception.NotFound;
 import todolist.repository.ToDoListRepository;
 
+import java.io.FileNotFoundException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -14,8 +15,8 @@ public class ToDoListService {
     @Autowired
     private ToDoListRepository repo;
 
-    public ToDoList findById(Long id) throws NotFound {
-        return repo.findById(id).orElseThrow(NotFound::new);
+    public ToDoList findById(Long id) throws FileNotFoundException {
+        return repo.findById(id).orElseThrow(FileNotFoundException::new);
     }
 
     public ToDoList save(ToDoList toDoList) {
@@ -26,7 +27,7 @@ public class ToDoListService {
         return repo.findAll();
     }
 
-    public ToDoList update(Long id, String name, String content) throws NotFound {
+    public ToDoList update(Long id, String name, String content) throws FileNotFoundException {
         ToDoList toDoList = findById(id);
         toDoList.setName(name);
         toDoList.setContent(content);

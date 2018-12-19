@@ -4,7 +4,7 @@ var { DateTime } = require('luxon');
 $(document).ready(function () {
 
     $('#todolistForm').submit(function (event) {
-        event.preventDefault();        
+        event.preventDefault();
 
         function datetimeToLong(estimated) {
             return DateTime.fromISO(estimated).toMillis();
@@ -27,38 +27,18 @@ $(document).ready(function () {
             dataType: 'json',
             success: function () {
                 alert('新增成功!')
-                history.back()
-                // console.log();
+                history.back()                
             },
             error: function (e) {
                 alert('Error!')
                 console.log('ERROR: ', e);
             }
-        });        
+        });
 
     });
 
-
-
-    $('#toDoListTable').on('click', 'a', function () {
-        var todolistId = $(this).parent().find('#deleteId').val();
-
-        $.ajax({
-            type: 'DELETE',
-            url: window.location + 'api/todolist/' + todolistId,
-            success: function (result) {
-                console.log(result);
-            },
-            error: function (e) {
-                alert('ERROR: ', e);
-                console.log('ERROR: ', e);
-            }
-        });
-        window.location.reload();
-    });    
-
     $('#todolistSelectCreate').submit(function (event) {
-        event.preventDefault();        
+        event.preventDefault();
 
         function datetimeToLong(estimated) {
             return DateTime.fromISO(estimated).toMillis();
@@ -67,16 +47,16 @@ $(document).ready(function () {
         var selectTime = datetimeToLong($('#selectCreate').val());
 
         $.ajax({
-            type: 'GET',            
-            url: window.location + 'api/todolist/createTime',
-            data : 'time=' + selectTime,
+            type: 'GET',
+            url: 'api/todolist/createTime',
+            data: 'time=' + selectTime,
             success: function (result) {
                 $.each(result, function (index, todolist) {
-                    var toDoListRow = '<tr>' + index +                        
+                    var toDoListRow = '<tr>' + index +
                         '<td>' + todolist.id + '</td>' +
-                        '<td>' + new Date(todolist.estimated).toLocaleString() + '</td>' +
-                        '<td>' + new Date(todolist.createDate).toLocaleString() + '</td>' +
-                        '<td>' + todolist.name + '</td>' +                        
+                        '<td>' + DateTime.fromISO(todolist.estimated).toISODate() + '</td>' +
+                        '<td>' + DateTime.fromISO(todolist.createDate).toISODate() + '</td>' +
+                        '<td>' + todolist.name + '</td>' +
                         '</tr>' +
                         '<tr><td></td><td colspan="5">' + todolist.content + '</td></tr>';
                     $('#toDoListSelectCreateTable tbody').append(toDoListRow);
